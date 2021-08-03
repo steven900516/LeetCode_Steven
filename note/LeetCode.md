@@ -571,3 +571,125 @@ public List<String> letterCombinations(String digits) {
 
 
 
+# 8.删除链表的倒数第 N 个结点（19）
+
+## 数据结构
+
+涉及：链表
+
+
+
+
+
+
+
+## 题解
+
+思路：
+
+在对链表进行操作时，一种常用的技巧是添加一个哑节点（dummy node），它的 next 指针指向链表的头节点。这样一来，我们就不需要对头节点进行特殊的判断了。
+
+例如，在本题中，如果我们要删除节点 y，我们需要知道节点 y 的前驱节点 x，并将 x 的指针指向 y 的后继节点。但由于头节点不存在前驱节点，因此我们需要在删除头节点时进行特殊判断。但如果我们添加了哑节点，那么头节点的前驱节点就是哑节点本身，此时我们就只需要考虑通用的情况即可。
+
+
+
+
+
+
+
+* 首先得计算出链表的长度len
+
+* 将cur指针移动到删除节点前一个结点
+
+  
+
+
+
+```java
+public ListNode removeNthFromEnd(ListNode head, int n) {
+        int len = 0;
+        ListNode cur = head;
+        while(cur != null){
+            cur = cur.next;
+            len ++ ;
+        }
+        ListNode dummy = new ListNode(0,head);
+        cur = dummy;
+        for (int i = 0; i < len - n; i++) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+        return dummy.next;
+}
+```
+
+
+
+
+
+[![f9uK1O.png](https://z3.ax1x.com/2021/08/02/f9uK1O.png)](https://imgtu.com/i/f9uK1O)
+
+
+
+
+
+
+
+# 9.括号生成（22）
+
+## 题解
+
+算法：剪枝/回溯算法
+
+[![fPN8VP.md.png](https://z3.ax1x.com/2021/08/03/fPN8VP.md.png)](https://imgtu.com/i/fPN8VP)
+
+思路
+
+*  从空字符串开始（“ ”）来进行开始
+* 决定退出的条件:当左括号个数=n  && 右括号个数=n，添加字符串
+* 剪枝条件：左括号个数 > n或左括号个数小于右括号个数
+
+
+
+
+
+**代码**
+
+```java
+public class GenerateParenthesis {
+    ArrayList<String> list = new ArrayList<>();
+    int n;
+
+    public List<String> generateParenthesis(int n) {
+        this.n = n;
+        helper("",0,0);
+        return list;
+
+    }
+
+    private void helper(String curr, int left, int right) {
+        if(left == n && right ==n){
+            list.add(curr);
+        }
+
+        if(left > n ||left < right){
+            return;
+        }
+        helper(curr + "(" ,left + 1,right);
+        helper(curr + ")" ,left,right + 1);
+    }
+
+
+    public static void main(String[] args) {
+        GenerateParenthesis generateParenthesis = new GenerateParenthesis();
+        System.out.println(generateParenthesis.generateParenthesis(3));
+    }
+}
+```
+
+
+
+
+
+
+
