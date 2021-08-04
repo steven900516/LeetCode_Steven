@@ -693,3 +693,88 @@ public class GenerateParenthesis {
 
 
 
+# 10.两数相除（29）
+
+## 位运算
+
+1.位运算，左移一位是 * 2
+
+2.位运算，右移一位是 / 2
+
+
+
+
+
+## 题解
+
+思路：
+
+以10 /3 = 3为例
+
+**一般的思路为：**
+
+10-3-3-3
+
+
+
+这种思路若被除数过大，会导致时间开销很大
+
+所以可以简化为
+
+10-3 * (2^0) -3 * (2^1) ……
+
+以指数级的增长速度递增
+
+
+
+[(59条消息) leetcode29——两数相除——java实现_阿花的IT历程-CSDN博客](https://blog.csdn.net/qq_41645636/article/details/99999884)
+
+**分析**：
+由于是有符号整数，所以我们要把正负情况都考虑进去。
+为了简便运算，主体代码算的全是正的值，然后设置一个sign来表示正负号就可以了。
+
+接下来主要看如何进行这个除法运算。
+由于题目要求我们不能用乘法、除法、mod运算符，所以第一反应就是考虑位运算。
+
+对于位运算，左移一位是*2，右移一位是/2.
+在这里，我们要求的是它的商，可以这样考虑：
+在被除数 >= 除数的条件下，令一个temp = 1,然后将除数左移一位，如果此时的除数 <= 被除数，则temp也左移一位，直到除数 > 被除数为止。
+
+
+
+![](https://img-blog.csdnimg.cn/2019082121372350.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjQ1NjM2,size_16,color_FFFFFF,t_70)
+
+
+
+
+
+代码实现
+
+```java
+class Solution {
+    public int divide(int dividend, int divisor) {
+        if(divisor == 0 || (dividend == Integer.MIN_VALUE && divisor == -1))
+            return Integer.MAX_VALUE;
+        int sign = (dividend < 0) ^ (divisor < 0) ? -1 : 1;
+        long ldividend = (long)dividend;
+        long ldivisor = (long)divisor;
+        
+        ldividend = Math.abs(ldividend);
+        ldivisor = Math.abs(ldivisor);
+        int count = 0;
+        while(ldividend >= ldivisor) {
+            long lds = ldivisor;
+            long temp = 1;
+            while((lds << 1) <= ldividend) {
+                lds = (lds << 1);
+                temp = (temp << 1);
+            }
+            count += temp;
+            ldividend = ldividend - lds;
+        }
+        return count * sign;
+    }
+}
+
+```
+
