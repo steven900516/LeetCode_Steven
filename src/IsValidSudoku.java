@@ -80,6 +80,6 @@ public class IsValidSudoku {
         chars[8][3] = '4';
         chars[8][7] = '7';
         IsValidSudoku isValidSudoku = new IsValidSudoku();
-        System.out.println(isValidSudoku.isValidSudoku(chars));
+        System.out.println(isValidSudoku.isValidSudoku(chars)); //
     }
 }
