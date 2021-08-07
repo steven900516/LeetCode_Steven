@@ -874,3 +874,83 @@ class Solution {
 
 ```
 
+
+
+
+
+# 12.有效数独(36)
+
+## 题解
+
+**分析条件**
+
+* 行中没有重复的数字。
+* 列中没有重复的数字。
+* `3 x 3` 子数独内没有重复的数字。
+
+
+
+
+
+### 解法（列出三个条件，三次循环，可以合并到一个循环中）
+
+```java
+public class IsValidSudoku {
+    public boolean isValidSudoku(char[][] board) {
+        HashMap<Character, Integer> count = new HashMap<Character, Integer>();//存储每行或         每列或3*3的数据，并检查是否重复
+        int times = 0;  //每3*3块的迭代次数
+        int index = 0;  //3*3循环中行的增长速率
+        int l = 0;    //3*3循环中列的增长速率
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if(count.containsKey(board[i][j])){
+                    return false;
+                }
+                if(Character.isDigit(board[i][j])){
+                    count.put(board[i][j],1);
+                }
+            }
+            count.clear();//清空map
+        }
+        for (int i = 0; i < board[0].length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if(count.containsKey(board[j][i])){
+                    return false;
+                }
+                if(Character.isDigit(board[j][i])){
+                    count.put(board[j][i],1);
+                }
+            }
+            count.clear();
+        }
+        while(true){
+            if(times % 3==0 && times !=0){
+                l++;
+            }
+            if(times % 3 == 0){
+                index = 0;
+            }
+            for (int i = index  * 3; i <  3 * (index + 1); i++) {
+                for (int j = l * 3; j < (l + 1) * 3; j++) {
+                    if(count.containsKey(board[i][j])){
+                        return false;
+                    }
+                    if(Character.isDigit(board[i][j])){
+                        count.put(board[i][j],1);
+                    }
+                }
+            }
+            count.clear();  //清空3*3的map，进行下一次循环
+            index++;
+            times++;
+            if(times == board.length){
+                break;
+            }
+        }
+        return true;
+    }
+}
+```
+
+
+
