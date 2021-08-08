@@ -954,3 +954,101 @@ public class IsValidSudoku {
 
 
 
+
+
+
+
+# 13.全排列（46）
+
+## 算法
+
+[回溯算法解题套路框架 :: labuladong的算法小抄 (gitee.io)](https://labuladong.gitee.io/algo/4/29/93/)
+
+涉及算法：回溯算法
+
+
+
+**解决一个回溯问题，实际上就是一个决策树的遍历过程**。你只需要思考 3 个问题：
+
+1、路径：也就是已经做出的选择。
+
+2、选择列表：也就是你当前可以做的选择。
+
+3、结束条件：也就是到达决策树底层，无法再做选择的条件。
+
+
+
+```go
+result = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        result.add(路径)
+        return
+    
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+
+```
+
+**其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」**
+
+
+
+
+
+## 题解
+
+![img](https://labuladong.gitee.io/algo/images/backtracking/1.jpg)
+
+只要从根遍历这棵树，记录路径上的数字，其实就是所有的全排列。**我们不妨把这棵树称为回溯算法的「决策树」**。
+
+**为啥说这是决策树呢，因为你在每个节点上其实都在做决策**。比如说你站在下图的红色节点上：
+
+[![img](https://labuladong.gitee.io/algo/images/backtracking/2.jpg)](https://labuladong.gitee.io/algo/images/backtracking/2.jpg)
+
+你现在就在做决策，可以选择 1 那条树枝，也可以选择 3 那条树枝。为啥只能在 1 和 3 之中选择呢？因为 2 这个树枝在你身后，这个选择你之前做过了，而全排列是不允许重复使用数字的。
+
+**现在可以解答开头的几个名词：`[2]` 就是「路径」，记录你已经做过的选择；`[1,3]` 就是「选择列表」，表示你当前可以做出的选择；「结束条件」就是遍历到树的底层，在这里就是选择列表为空的时候**。
+
+
+
+代码：
+
+```java
+public class Permute {
+    List<List<Integer>> res = new LinkedList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        if (nums.length == 1){
+            List<Integer> temp = new LinkedList<>();
+            temp.add(nums[0]);
+            res.add(temp);
+            return res;
+        }
+        LinkedList<Integer> track = new LinkedList<>();
+        back(track, nums);
+        return res;
+    }
+    void back(LinkedList<Integer> track, int[] nums){
+        if (track.size() == nums.length){
+            res.add(new LinkedList<>(track));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (track.contains(nums[i])){
+                continue;
+            }
+            track.add(nums[i]);
+            back(track, nums);
+            track.removeLast();
+        }
+    }
+
+    public static void main(String[] args) {
+        Permute permute = new Permute();
+        System.out.println(permute.permute(new int[]{1,2,3,6}));
+    }
+}
+```
+
