@@ -6,6 +6,7 @@ import java.util.List;
  * @author Steven0516
  * @create 2021-08-08
  */
+//注释
 public class Permute {
     List<List<Integer>> res = new LinkedList<>();
     public List<List<Integer>> permute(int[] nums) {
