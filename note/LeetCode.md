@@ -1052,3 +1052,55 @@ public class Permute {
 }
 ```
 
+
+
+
+
+
+
+# 14.解码方法（91）
+
+## 算法
+
+涉及算法：动态规划	
+
+
+
+思路：
+
+这题可以想象成爬楼梯的升级版，加上腿酸不酸的条件（如果get不到可以忽视这句，捂脸）首先转移方程其实挺容易想的，就是边界条件想半天（吐槽）f(n)=f(n-1)+f(n-2)就是转移方程了。why？不考虑边界情况下，第n个字符可以自己独立进行解码，或者与n-1组合成两位数进行解码，所以f(n)=f(n-1)+f(n-2)。
+接下来就是考虑边界条件，首先什么情况下可以加上f(n-1)？根据前面说的可以自己独立解码时，那什么时候不加？就是不能独立解码，为0时。ok，完成一半了。
+什么情况下可以加上f(n-2)？根据前面说的n与n-1组成两位数并且可以解码，好！根据这句话可以得到，首先能是两位数，这是一个条件。并且可以解码，所以charAt(n-1)*10+charAt(n)得是两位数，并且<=26.还有一个可能会忽略的。得是两位数！什么情况下不会得到两位数？charAt(n-1) = 0,所以还有一个条件就是charAt(n-1) 不能为0.
+
+
+
+
+
+
+
+```java
+public class NumDecodings {
+    public int numDecodings(String s) {
+        int n = s.length();
+        int[] f = new int[n + 1];
+        f[0] = 1;
+        for (int i = 1; i <= n; ++i) {
+            if (s.charAt(i - 1) != '0') {
+                f[i] += f[i - 1];
+            }
+            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0') <= 26)) {
+                f[i] += f[i - 2];
+            }
+        }
+        return f[n];
+    }
+
+    public static void main(String[] args) {
+        NumDecodings numDecodings = new NumDecodings();
+        System.out.println(numDecodings.numDecodings("226"));
+    }
+}
+```
+
+
+
