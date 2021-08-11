@@ -1060,7 +1060,7 @@ public class Permute {
 
 # 14.解码方法（91）
 
-## 算法
+## 算法/题解
 
 涉及算法：动态规划	
 
@@ -1112,7 +1112,7 @@ public class NumDecodings {
 
 # 15.矩阵置零（73）
 
-## 算法
+## 算法/题解
 
 使用标记数组
 
@@ -1151,4 +1151,108 @@ class Solution {
 ```
 
 
+
+
+
+---
+
+
+
+# 16.二叉树的层序遍历（102）
+
+## 数据结构
+
+涉及：二叉树
+
+**定义**
+满二叉树：在满二叉树中除叶子结点外的内部结点，都有两个非空的子结点
+完全二叉树：从根节点开始，每一层按照从左到右的顺序依次水平填充树，叶子结点只能出现在最下层和次下层，且最下层的叶子结点集中在树的左部
+
+
+
+**性质**
+非空二叉树上的叶子结点数等于度为2的结点数加1，即n0 = n2 + 1
+
+非空二叉树第k层上至多有2k-1个结点（k>=1）
+
+具有n（n>0）个结点的完全二叉树的高度为 ⌊log2n⌋+1 或 ⌈log2n+1⌉
+
+
+
+
+
+**存储**
+顺序存储
+用一组连续的存储单元依次自上而下、自左至右存储完全二叉树上的结点元素
+
+对于一棵完全二叉树，这样存储的好处是数组下标直接对应某个结点。可以根据性质找到其双亲或孩子结点。
+
+对于一棵非完全二叉树，添加一个不存在的空结点，在数组中可以用0表示
+
+弊端：顺序存储最坏情况下会非常浪费存储空间，比较适合完全二叉树
+
+
+
+
+
+***遍历***
+
+按某条路径访问树中的每个结点，树的每个结点均被访问一次
+
+
+
+
+
+## 题解
+
+算法思想：
+
+1. 初始将根入队并访问根结点，然后出队
+2. 如有左子树，则将左子树的根入队
+3. 如有右子树，则将右子树的根入队
+4. 然后出队，访问该结点
+5. 反复该过程直至队列为空
+
+
+
+
+
+图示：
+
+[![fUfr0U.md.png](https://z3.ax1x.com/2021/08/11/fUfr0U.md.png)](https://imgtu.com/i/fUfr0U)
+
+
+
+
+
+按照该图，写出代码:
+
+```java
+public class LevelOrder {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        ArrayList<List<Integer>> res = new ArrayList<List<Integer>>();
+        Queue<TreeNode> eve = new LinkedList<>();
+        if(root == null){
+            return null;
+        }
+        eve.add(root);
+        while(!eve.isEmpty()){
+            ArrayList<Integer> integers = new ArrayList<>();
+            int size = eve.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode curr = eve.poll();
+                integers.add(curr.val);
+                if(curr.left != null){
+                    eve.add(curr.left);
+                }
+                if(curr.right != null) {
+                    eve.add(curr.right);
+                }
+            }
+            res.add(integers);
+        }
+        return res;
+    }
+}
+```
 
