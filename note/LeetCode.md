@@ -1289,3 +1289,55 @@ public class IsValidBST {
 
 ```
 
+
+
+
+
+
+
+
+
+
+
+# 18. Pow(x,n) (50)
+
+## 题解
+
+**快速幂 + 递归**
+
+
+
+> 如果我们要计算 x^64，我们可以按照：
+>
+> [![frElVJ.png](https://z3.ax1x.com/2021/08/13/frElVJ.png)](https://imgtu.com/i/frElVJ)
+
+的顺序，从 x*x* 开始，每次直接把上一次的结果进行平方，计算 6 次就可以得到 x^{64} 的值，而不需要对 x乘 63 次 x。
+
+
+
+[![frEqMT.md.png](https://z3.ax1x.com/2021/08/13/frEqMT.md.png)](https://imgtu.com/i/frEqMT)
+
+
+
+```java
+public class MyPow {
+    public double myPow(double x, int n) {
+        long N = n;
+        return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
+    }
+
+    public double quickMul(double x, long N) {
+        if (N == 0) {
+            return 1.0;
+        }
+        double y = quickMul(x, N / 2);
+        return N % 2 == 0 ? y * y : y * y * x;
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(new MyPow().myPow(2, 3));
+    }
+}
+```
+
