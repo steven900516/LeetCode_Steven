@@ -3,6 +3,9 @@
  * @create 2021-08-13
  */
 public class MyPow {
+    //增加注释
+
+
     public double myPow(double x, int n) {
         long N = n;
         return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
