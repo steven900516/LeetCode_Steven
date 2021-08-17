@@ -1341,3 +1341,41 @@ public class MyPow {
 }
 ```
 
+
+
+
+
+# 19.子集
+
+## 算法
+
+设计算法：回溯
+
+
+
+## 题解
+
+```java
+public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> allSubsets = new ArrayList<>();
+        List<Integer> tempsubset = new ArrayList<>();
+        for(int size =  0;size <= nums.length; size ++){
+            backtrack(0,size,tempsubset,allSubsets,nums);
+        }
+        return allSubsets;
+    }
+
+    private void backtrack(int index ,int size,List<Integer> tempsubset,List<List<Integer>> allSubsets,int[] nums){
+        if(tempsubset.size() == size){
+            allSubsets.add(new ArrayList<>(tempsubset));
+            return;
+        }
+
+        for(int i = index;i < nums.length;i++){
+            tempsubset.add(nums[i]);
+            backtrack(i + 1,size,tempsubset,allSubsets,nums);
+            tempsubset.remove(tempsubset.size() - 1);
+        }
+    }
+```
+
