@@ -1438,5 +1438,79 @@ class Solution {
 
 
 
-# 21.LRU缓存机制
+# 21.排序链表（148）
+
+
+
+## 思路
+　　要求 O(n log n) 时间复杂度和常数级空间复杂度，首先想到的就是快速排序和归并排序。
+　　此处使用归并排序，
+
+　　归并排序大致思想是： 1.将链表划分左右两部分--> 2.对左右链表进行排序 --> 3.将左右两个有序链表进行合并
+　　如果三个步骤如果分开实现的，都比较容易，但有人容易在第二步骤懵逼———为什么划分后，对左右链表进行排序，再合并，这不是多此一举么。直接使用第二步对原链表进行排序不就好了？
+　　
+　　所以，在归并排序中，实现第二步的实现，其实是靠第三部来完成的。
+　　当两个链表长度都为1时，即两个链表只有一个结点，那么我们就认为这两个链表是有序的，直接进行 步骤3——将两个有序链表进行合并，于是两个链表合并成了一个长度为2的有序链表。
+　　
+　　于是问题转化为，如何把一个长链表 划分为 长度为1的短链表？ 很简单，递归划分，不断的将长链表进行二分，最终分成多个长度为1的链表，然后进行合并， 过程类似于二叉树。
+
+　　感觉和快速排序的分治思想没有太大区别
+
+
+
+
+
+```java
+public class SortList {
+    public ListNode sortList(ListNode head) {
+        return sortList(head, null);
+    }
+
+    public ListNode sortList(ListNode head, ListNode tail) {
+        if (head == null) {
+            return head;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        ListNode slow = head, fast = head;
+        while (fast != tail) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+        ListNode mid = slow;
+        ListNode list1 = sortList(head, mid);
+        ListNode list2 = sortList(mid, tail);
+        ListNode sorted = merge(list1, list2);
+        return sorted;
+    }
+
+    public ListNode merge(ListNode head1, ListNode head2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode temp = dummyHead, temp1 = head1, temp2 = head2;
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val <= temp2.val) {
+                temp.next = temp1;
+                temp1 = temp1.next;
+            } else {
+                temp.next = temp2;
+                temp2 = temp2.next;
+            }
+            temp = temp.next;
+        }
+        if (temp1 != null) {
+            temp.next = temp1;
+        } else if (temp2 != null) {
+            temp.next = temp2;
+        }
+        return dummyHead.next;
+    }
+}
+```
+
+
 
