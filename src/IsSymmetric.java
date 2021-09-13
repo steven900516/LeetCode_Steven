@@ -5,7 +5,6 @@
 
 //对称的二叉树
 public class IsSymmetric {
-
     public boolean isSymmetric(TreeNode root) {
         return root == null ? true : recur(root.left, root.right);
     }
