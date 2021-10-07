@@ -22,4 +22,38 @@ public class CuttingRope {
         }
         return dp[n];
     }
+
+
+
+//  贪心算法并大数取余
+    public int cuttingRope2(int n) {
+
+        if(n <= 3){
+            return n - 1;
+        }
+        long res = 1;
+        int cnt = n / 3, big = 1000000007;
+        int least = n % 3;
+
+        for (int i = 0; i < cnt; i++) {
+            res = (res * 3) % big;
+        }
+
+        switch (least){
+            case 0:
+                res = res * 3 % big;
+                break;
+            case 1:
+                res = res * 4 % big;
+                break;
+            case 2:
+                res = res * 6 % big;
+                break;
+        }
+        return (int)res;
+
+
+
+
+    }
 }
