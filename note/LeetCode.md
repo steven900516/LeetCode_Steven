@@ -28,9 +28,9 @@
 
 ```java
 class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode pre = new ListNode(0);
-        ListNode cur = pre;
+    public leetcode.ListNode leetcode.addTwoNumbers(leetcode.ListNode l1, leetcode.ListNode l2) {
+        leetcode.ListNode pre = new leetcode.ListNode(0);
+        leetcode.ListNode cur = pre;
         int carry = 0;
         while(l1 != null || l2 != null) {
             int x = l1 == null ? 0 : l1.val;
@@ -39,7 +39,7 @@ class Solution {
             
             carry = sum / 10;
             sum = sum % 10;
-            cur.next = new ListNode(sum);
+            cur.next = new leetcode.ListNode(sum);
 
             cur = cur.next;
             if(l1 != null)
@@ -48,7 +48,7 @@ class Solution {
                 l2 = l2.next;
         }
         if(carry == 1) {
-            cur.next = new ListNode(carry);
+            cur.next = new leetcode.ListNode(carry);
         }
         return pre.next;
     }
@@ -606,14 +606,14 @@ public List<String> letterCombinations(String digits) {
 
 
 ```java
-public ListNode removeNthFromEnd(ListNode head, int n) {
+public leetcode.ListNode removeNthFromEnd(leetcode.ListNode head, int n) {
         int len = 0;
-        ListNode cur = head;
+        leetcode.ListNode cur = head;
         while(cur != null){
             cur = cur.next;
             len ++ ;
         }
-        ListNode dummy = new ListNode(0,head);
+        leetcode.ListNode dummy = new leetcode.ListNode(0,head);
         cur = dummy;
         for (int i = 0; i < len - n; i++) {
             cur = cur.next;
@@ -656,7 +656,7 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
 **代码**
 
 ```java
-public class GenerateParenthesis {
+public class leetcode.GenerateParenthesis {
     ArrayList<String> list = new ArrayList<>();
     int n;
 
@@ -681,7 +681,7 @@ public class GenerateParenthesis {
 
 
     public static void main(String[] args) {
-        GenerateParenthesis generateParenthesis = new GenerateParenthesis();
+        leetcode.GenerateParenthesis generateParenthesis = new leetcode.GenerateParenthesis();
         System.out.println(generateParenthesis.generateParenthesis(3));
     }
 }
@@ -895,7 +895,7 @@ class Solution {
 ### 解法（列出三个条件，三次循环，可以合并到一个循环中）
 
 ```java
-public class IsValidSudoku {
+public class leetcode.IsValidSudoku {
     public boolean isValidSudoku(char[][] board) {
         HashMap<Character, Integer> count = new HashMap<Character, Integer>();//存储每行或         每列或3*3的数据，并检查是否重复
         int times = 0;  //每3*3块的迭代次数
@@ -1017,7 +1017,7 @@ def backtrack(路径, 选择列表):
 代码：
 
 ```java
-public class Permute {
+public class leetcode.Permute {
     List<List<Integer>> res = new LinkedList<>();
     public List<List<Integer>> permute(int[] nums) {
         if (nums.length == 1){
@@ -1046,7 +1046,7 @@ public class Permute {
     }
 
     public static void main(String[] args) {
-        Permute permute = new Permute();
+        leetcode.Permute permute = new leetcode.Permute();
         System.out.println(permute.permute(new int[]{1,2,3,6}));
     }
 }
@@ -1079,7 +1079,7 @@ public class Permute {
 
 
 ```java
-public class NumDecodings {
+public class leetcode.NumDecodings {
     public int numDecodings(String s) {
         int n = s.length();
         int[] f = new int[n + 1];
@@ -1096,7 +1096,7 @@ public class NumDecodings {
     }
 
     public static void main(String[] args) {
-        NumDecodings numDecodings = new NumDecodings();
+        leetcode.NumDecodings numDecodings = new leetcode.NumDecodings();
         System.out.println(numDecodings.numDecodings("226"));
     }
 }
@@ -1228,24 +1228,26 @@ class Solution {
 按照该图，写出代码:
 
 ```java
+import leetcode.TreeNode;
+
 public class LevelOrder {
     public List<List<Integer>> levelOrder(TreeNode root) {
         ArrayList<List<Integer>> res = new ArrayList<List<Integer>>();
         Queue<TreeNode> eve = new LinkedList<>();
-        if(root == null){
+        if (root == null) {
             return null;
         }
         eve.add(root);
-        while(!eve.isEmpty()){
+        while (!eve.isEmpty()) {
             ArrayList<Integer> integers = new ArrayList<>();
             int size = eve.size();
             for (int i = 0; i < size; i++) {
                 TreeNode curr = eve.poll();
                 integers.add(curr.val);
-                if(curr.left != null){
+                if (curr.left != null) {
                     eve.add(curr.left);
                 }
-                if(curr.right != null) {
+                if (curr.right != null) {
                     eve.add(curr.right);
                 }
             }
@@ -1267,8 +1269,11 @@ public class LevelOrder {
 ## 题解
 
 ```java
+import leetcode.TreeNode;
+
 public class IsValidBST {
     long pre = Long.MIN_VALUE;
+
     public boolean isValidBST(TreeNode root) {
         if (root == null) {
             return true;
@@ -1320,7 +1325,7 @@ public class IsValidBST {
 
 
 ```java
-public class MyPow {
+public class leetcode.MyPow {
     public double myPow(double x, int n) {
         long N = n;
         return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
@@ -1336,7 +1341,7 @@ public class MyPow {
 
 
     public static void main(String[] args) {
-        System.out.println(new MyPow().myPow(2, 3));
+        System.out.println(new leetcode.MyPow().myPow(2, 3));
     }
 }
 ```
@@ -1461,12 +1466,12 @@ class Solution {
 
 
 ```java
-public class SortList {
-    public ListNode sortList(ListNode head) {
+public class leetcode.SortList {
+    public leetcode.ListNode sortList(leetcode.ListNode head) {
         return sortList(head, null);
     }
 
-    public ListNode sortList(ListNode head, ListNode tail) {
+    public leetcode.ListNode sortList(leetcode.ListNode head, leetcode.ListNode tail) {
         if (head == null) {
             return head;
         }
@@ -1474,7 +1479,7 @@ public class SortList {
             head.next = null;
             return head;
         }
-        ListNode slow = head, fast = head;
+        leetcode.ListNode slow = head, fast = head;
         while (fast != tail) {
             slow = slow.next;
             fast = fast.next;
@@ -1482,16 +1487,16 @@ public class SortList {
                 fast = fast.next;
             }
         }
-        ListNode mid = slow;
-        ListNode list1 = sortList(head, mid);
-        ListNode list2 = sortList(mid, tail);
-        ListNode sorted = merge(list1, list2);
+        leetcode.ListNode mid = slow;
+        leetcode.ListNode list1 = sortList(head, mid);
+        leetcode.ListNode list2 = sortList(mid, tail);
+        leetcode.ListNode sorted = merge(list1, list2);
         return sorted;
     }
 
-    public ListNode merge(ListNode head1, ListNode head2) {
-        ListNode dummyHead = new ListNode(0);
-        ListNode temp = dummyHead, temp1 = head1, temp2 = head2;
+    public leetcode.ListNode merge(leetcode.ListNode head1, leetcode.ListNode head2) {
+        leetcode.ListNode dummyHead = new leetcode.ListNode(0);
+        leetcode.ListNode temp = dummyHead, temp1 = head1, temp2 = head2;
         while (temp1 != null && temp2 != null) {
             if (temp1.val <= temp2.val) {
                 temp.next = temp1;
