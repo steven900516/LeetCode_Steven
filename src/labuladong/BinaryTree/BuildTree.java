@@ -1,6 +1,4 @@
 package labuladong.BinaryTree;
-
-
 import java.util.HashMap;
 
 /**
