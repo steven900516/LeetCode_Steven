@@ -66,12 +66,7 @@ public class SolveSudoku {
         return true;
     }
 
-    public static void main(String[] args) {
-        String s = String.valueOf(1);
-        char i2 = '1';
-        System.out.println(s.charAt(0));
-        System.out.println(i2);
-    }
+
 
 
     /*
