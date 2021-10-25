@@ -22,7 +22,6 @@ public class MinDistance {
             int r3 = Math.min(r1,r2);
             return Math.min(r3,dp(i - 1,j - 1,w1,w2) + 1);
         }
-
     }
 
 

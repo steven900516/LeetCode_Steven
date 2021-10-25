@@ -26,6 +26,6 @@ public class LengthOfLIS {
                 right = mid - 1;
             }
         }
-
+        return 1;
     }
 }
