@@ -1,31 +1,27 @@
 package labuladong.Dynamic;
 
+import java.util.Arrays;
+
 /**
  * @author Steven0516
  * @create 2021-10-23
  */
 public class LengthOfLIS {
     public int lengthOfLIS(int[] nums) {
-        int target = Integer.MAX_VALUE;
-        int left = 0;
-        int index = 0;
-        int right = nums.length - 1;
+        int[] dp = new int[nums.length + 1];
+        Arrays.fill(dp,1);
         for (int i = 0; i < nums.length; i++) {
-            if(nums[i] < target){
-                target = nums[i];
+            for (int j = 0; j < i; j++) {
+                if(nums[i] > nums[j] ){
+                    dp[i] = Math.max(dp[i],dp[j] + 1);
+                }
             }
         }
-        while(left <= right){
-            int mid = left + (right - left) / 2 ;
-            if(nums[mid] == target){
-                index = mid;
-                break;
-            }else if(nums[mid] < target){
-                left = mid + 1;
-            }else if(nums[mid] > target){
-                right = mid - 1;
-            }
+        int res = 0;
+        for (int i = 0; i < dp.length; i++) {
+            Math.max(res,dp[i]);
         }
-        return 1;
+
+        return res;
     }
 }

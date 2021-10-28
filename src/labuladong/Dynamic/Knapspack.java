@@ -23,7 +23,6 @@ public class Knapspack {
                 }else{
                     //装入背包
                     dp[i][w] = Math.max(dp[i - 1][w - wt[i - 1]] + val[i - 1],dp[i  - 1][w]);
-
                 }
             }
         }
