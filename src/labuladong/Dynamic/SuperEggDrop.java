@@ -33,4 +33,39 @@ public class SuperEggDrop {
         memo[K][N] = res;
         return res;
     }
+
+
+
+
+    //
+    public int superEggDrop2(int k, int n) {
+        int[][] memo = new int[k + 1][n + 1];
+        for(int i = 0; i < k + 1; i++){
+            Arrays.fill(memo[i], -1);
+        }
+        return dp(k, n, memo);
+    }
+
+    private int dp(int k, int n, int[][] memo){
+        if(k == 1) return n;
+        if(n <= 0) return 0;
+        if(memo[k][n] != -1) return memo[k][n];
+        int res = Integer.MAX_VALUE;
+        int lo = 1;
+        int hi = n;
+        while(lo <= hi){
+            int mid = (lo + hi) / 2;
+            int broken = dp(k - 1, mid - 1, memo);
+            int noBroken = dp(k , n - mid, memo);
+            if(broken > noBroken){
+                hi = mid - 1;
+                res = Math.min(res, broken + 1);
+            }else{
+                lo = mid + 1;
+                res = Math.min(res, noBroken + 1);
+            }
+        }
+        memo[k][n] = res;
+        return res;
+    }
 }
