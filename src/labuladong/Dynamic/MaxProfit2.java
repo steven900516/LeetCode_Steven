@@ -4,7 +4,7 @@ package labuladong.Dynamic;
  * @author Steven0516
  * @create 2021-11-03
  */
-public class maxProfit2 {
+public class MaxProfit2 {
     public int maxProfit(int[] prices) {
         int n = prices.length;
         int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
