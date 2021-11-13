@@ -55,11 +55,9 @@ class Robot {
                     break;
             }
         }
-
     }
 
     public int[] getPos(){
-
         return new int[]{x,y};
     }
 
