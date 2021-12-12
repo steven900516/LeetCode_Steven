@@ -7,6 +7,19 @@ import java.util.Arrays;
  * @create 2021-12-10
  */
 public class HeapSort {
+    public static void total(int[] arr,int length){
+        for (int i = arr.length / 2-1; i >= 0; i--) {
+            maximumHeap(i,arr,length);
+        }
+        //从最小的叶子节点开始与根节点进行交换并重新构建大顶堆
+        for (int i = arr.length-1; i >=0; i--) {
+//            System.out.println(Arrays.toString(arr));
+            swap(arr,0,i);
+            length--;
+            maximumHeap(0,arr,length);
+        }
+    }
+
     public static void maximumHeap(int i,int[] arr,int length){
         int temp = arr[i];
         for (int j = i*2+1; j < length; j=j*2+1) {
@@ -36,16 +49,7 @@ public class HeapSort {
         int[] arr = new int[]{4,6,8,5,9};
         int length = arr.length;
         //从最后一个非叶节点开始构建大顶堆
-        for (int i = arr.length/2-1; i >=0; i--) {
-            maximumHeap(i,arr,length);
-        }
-        //从最小的叶子节点开始与根节点进行交换并重新构建大顶堆
-        for (int i = arr.length-1; i >=0; i--) {
-//            System.out.println(Arrays.toString(arr));
-            swap(arr,0,i);
-            length--;
-            maximumHeap(0,arr,length);
-        }
+        total(arr,length);
         System.out.println(Arrays.toString(arr));
     }
 }
