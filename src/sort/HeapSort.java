@@ -22,7 +22,7 @@ public class HeapSort {
 
     public static void maximumHeap(int i,int[] arr,int length){
         int temp = arr[i];
-        for (int j = i*2+1; j < length; j=j*2+1) {
+        for (int j = i * 2 + 1; j < length; j=j*2+1) {
             //如果右孩子大于做孩子，则指向右孩子
             if(j+1<length && arr[j+1]>arr[j]){
                 j++;
