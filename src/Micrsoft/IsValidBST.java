@@ -17,8 +17,7 @@ public class IsValidBST {
     }
 
     private boolean judge(TreeNode root, TreeNode min, TreeNode max) {
-        Map<Integer,Integer> res = new HashMap<>();
-        Set<Integer> integers = res.keySet();
+
 
         if(min != null && root.val <= min.val){
             return false;
@@ -29,6 +28,28 @@ public class IsValidBST {
 
 
         return judge(root.left,min,root) && judge(root.right,root,max);
+
+    }
+
+    TreeNode pre;
+    boolean flag = true;
+    public boolean isValidBST2(TreeNode root) {
+        dfs(root);
+        return flag;
+    }
+
+    public void dfs(TreeNode root){
+        if(root == null){
+            return;
+        }
+        dfs(root.left);
+
+        if(pre != null && root.val <= pre.val){
+            System.out.println("pre : "+ pre.val + ", cur : " + root.val);
+            flag = false;
+        }
+        pre = root;
+        dfs(root.right);
 
     }
 }
