@@ -28,4 +28,9 @@ public class Knapspack {
         }
         return dp[N][W];
     }
+
+    public static void main(String[] args) {
+        String s = new String(new char[]{'a', 'b', 'c', 'd'}, 0, 2);
+        System.out.println(s);
+    }
 }
