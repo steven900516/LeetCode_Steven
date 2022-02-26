@@ -18,7 +18,7 @@ public class SubsetsAgain {
             LinkedList<Integer> path = new LinkedList<>();
             recur(i,path,0,nums);
         }
-        Integer.MAX_VALUE
+//        Integer.MAX_VALUE
         return res;
     }
 
