@@ -10,6 +10,7 @@ public class HeapSort {
     public static void total(int[] arr,int length){
         for (int i = arr.length / 2-1; i >= 0; i--) {
             maximumHeap(i,arr,length);
+            System.out.println(Arrays.toString(arr));
         }
         //从最小的叶子节点开始与根节点进行交换并重新构建大顶堆
         for (int i = arr.length-1; i >=0; i--) {
