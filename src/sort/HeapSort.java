@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class HeapSort {
     public static void total(int[] arr,int length){
-        for (int i = arr.length / 2-1; i >= 0; i--) {
+        for (int i = arr.length / 2 - 1; i >= 0; i--) {
             maximumHeap(i,arr,length);
             System.out.println(Arrays.toString(arr));
         }
