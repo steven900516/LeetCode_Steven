@@ -1,7 +1,6 @@
 package labuladong.BinaryTree;
 
-import labuladong.ListNode.ListNode;
-import sun.reflect.generics.tree.Tree;
+
 
 import java.util.LinkedList;
 import java.util.List;
